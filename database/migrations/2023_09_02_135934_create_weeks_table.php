@@ -13,6 +13,7 @@ return new class extends Migration {
             $table->string('type');
             $table->date('start');
             $table->date('end');
+            $table->mediumText('notes')->nullable();
 
             $table->unsignedBigInteger('cycle_id');
             $table->index('cycle_id');

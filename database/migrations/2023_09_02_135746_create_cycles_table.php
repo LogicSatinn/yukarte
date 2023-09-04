@@ -10,7 +10,10 @@ return new class extends Migration {
         Schema::create('cycles', function (Blueprint $table) {
             $table->id();
 
+            $table->date('start');
+            $table->date('end');
             $table->integer('training_max');
+            $table->mediumText('notes')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

@@ -9,12 +9,11 @@ return new class extends Migration {
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
+            $table->ulid();
 
-            $table->decimal('one_rep_max');
             $table->string('weight_unit');
             $table->integer('training_max_percentage');
-            $table->json('main_lift_options');
-            $table->json('template');
+            $table->json('starting_weight_stats');
 
             $table->unsignedBigInteger('user_id');
 

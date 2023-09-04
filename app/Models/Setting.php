@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Setting extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, HasUlids;
 
     protected $fillable = [
         'one_rep_max',
@@ -22,6 +23,11 @@ class Setting extends Model
         'main_lift_options' => 'array',
         'template' => 'array',
     ];
+
+    public function uniqueIds(): array
+    {
+        return ['ulid'];
+    }
 
     public function user(): BelongsTo
     {

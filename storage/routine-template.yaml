@@ -1,0 +1,43 @@
+week_1:
+  set_1:
+    percentage_based_on_training_max: 65
+    reps: 5
+  set_2:
+    percentage_based_on_training_max: 75
+    reps: 5
+  set_3:
+    percentage_based_on_training_max: 85
+    reps: 5+
+
+week_2:
+  set_1:
+    percentage_based_on_training_max: 70
+    reps: 3
+  set_2:
+    percentage_based_on_training_max: 80
+    reps: 3
+  set_3:
+    percentage_based_on_training_max: 90
+    reps: 3+
+
+week_3:
+  set_1:
+    percentage_based_on_training_max: 75
+    reps: 5
+  set_2:
+    percentage_based_on_training_max: 85
+    reps: 3
+  set_3:
+    percentage_based_on_training_max: 95
+    reps: 1+
+
+week_4:
+    set_1:
+        percentage_based_on_training_max: 40
+        reps: 5
+    set_2:
+        percentage_based_on_training_max: 50
+        reps: 5
+    set_3:
+        percentage_based_on_training_max: 60
+        reps: 5

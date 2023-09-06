@@ -1,17 +1,11 @@
+@section('title', __('Home'))
+
 <section>
-    <div x-data="{
-        progress: 0,
-        progressInterval: null
-    }"
-         x-init="
-        progressInterval = setInterval(() => {
-            progress = progress + 1;
-            if (progress >= 100) {
-                clearInterval(progressInterval);
-            }
-        }, 100);
-    "
-         class="relative w-full h-3 overflow-hidden rounded-full bg-neutral-100">
-        <span :style="'width:' + progress + '%'" class="absolute w-24 h-full duration-300 ease-linear bg-neutral-900" x-cloak></span>
-    </div>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Home') }}
+        </h2>
+    </x-slot>
+
+    {{ __("You're logged in!") }}
 </section>

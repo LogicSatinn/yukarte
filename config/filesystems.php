@@ -56,6 +56,13 @@ return [
             'throw' => false,
         ],
 
+        'settings' => [
+            'driver' => 'local',
+            'root' => storage_path('settings'),
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
     ],
 
     /*

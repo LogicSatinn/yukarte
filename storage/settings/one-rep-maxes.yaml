@@ -1,0 +1,12 @@
+Squat:
+    one_rep_max: 48.0
+    training_max: '43.2'
+'Bench Press':
+    one_rep_max: 48.0
+    training_max: '43.2'
+Deadlift:
+    one_rep_max: 53.0
+    training_max: '47.7'
+'Standing Press':
+    one_rep_max: 30.0
+    training_max: '27.0'

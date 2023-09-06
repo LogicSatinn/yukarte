@@ -2,8 +2,12 @@
 
 namespace App\Enums;
 
+use Cerbero\Enum\Concerns\Enumerates;
+
 enum WeightUnit
 {
+    use Enumerates;
+
     case Kilograms;
     case Pounds;
 

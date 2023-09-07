@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for 5-3-1-workout-log on 2023-09-06T16:01:27+03:00
+# fly.toml app configuration file generated for yukarte on 2023-09-06T16:45:24+03:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "5-3-1-workout-log"
+app = "yukarte"
 primary_region = "sin"
 console_command = "php /var/www/html/artisan tinker"
 
@@ -13,7 +13,7 @@ console_command = "php /var/www/html/artisan tinker"
     PHP_VERSION = "8.2"
 
 [deploy]
-  release_command = "php /var/www/html/artisan migrate --force"
+  release_command = "php /var/www/html/artisan migrate:fresh --seed --force"
 
 [env]
   APP_ENV = "production"

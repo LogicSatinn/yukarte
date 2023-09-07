@@ -12,9 +12,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-         User::factory()->create([
+         User::create([
              'username' => 'LogicSatinn',
              'phone_number' => '+255692107171',
+             'password' => 'password',
          ]);
     }
 }

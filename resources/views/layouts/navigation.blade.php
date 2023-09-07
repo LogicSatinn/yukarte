@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                        <x-application-logo class="flex h-9 self-center items-center w-auto fill-current tracking-wide text-gray-800 dark:text-gray-200" />
                     </a>
                 </div>
 
@@ -14,6 +14,9 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link wire:navigate.hover :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('Home') }}
+                    </x-nav-link>
+                    <x-nav-link wire:navigate.hover :href="route('workout-routine')" :active="request()->routeIs('workout-routine')">
+                        {{ __('Routine') }}
                     </x-nav-link>
                     <x-nav-link wire:navigate.hover :href="route('setting')" :active="request()->routeIs('setting')">
                         {{ __('Setting') }}
@@ -23,6 +26,11 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
+                <div class="inline-flex items-center px-3 py-2" x-data="toggleTheme">
+                    <x-heroicon-s-sun x-show="theme === 'dark'" @click="toggle" class="h-6 w-6 text-gray-700 dark:text-gray-300" />
+
+                    <x-heroicon-s-moon x-show="theme === 'light'" @click="toggle" class="h-6 w-6 text-gray-700 dark:text-gray-300" />
+                </div>
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
@@ -73,6 +81,9 @@
             <x-responsive-nav-link wire:navigate.hover :href="route('home')" :active="request()->routeIs('home')">
                 {{ __('Home') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link wire:navigate.hover :href="route('workout-routine')" :active="request()->routeIs('workout-routine')">
+                {{ __('Routine') }}
+            </x-responsive-nav-link>
             <x-responsive-nav-link wire:navigate.hover :href="route('setting')" :active="request()->routeIs('setting')">
                 {{ __('Setting') }}
             </x-responsive-nav-link>
@@ -103,4 +114,36 @@
             </div>
         </div>
     </div>
+
+    @push('scripts')
+        <script>
+            document.addEventListener('alpine:init', () => {
+                Alpine.data('toggleTheme', () => ({
+                    theme: '',
+                    init() {
+                        if (window.matchMedia('(prefers-color-scheme: dark)') && localStorage.getItem('theme') === 'dark') {
+                            this.theme = 'dark';
+                        } else {
+                            this.theme = 'light';
+                        }
+                        localStorage.theme = this.theme;
+                        this.applyTheme()
+                    },
+                    toggle() {
+                        this.theme = this.theme === 'light' ? 'dark' : 'light';
+                        localStorage.theme = this.theme;
+                        this.applyTheme()
+                    },
+                    async applyTheme() {
+                        await this.$nextTick();
+                        if (localStorage.theme === 'dark') {
+                            document.documentElement.classList.add('dark')
+                        } else {
+                            document.documentElement.classList.remove('dark')
+                        }
+                    }
+                }))
+            })
+        </script>
+    @endpush
 </nav>

@@ -87,7 +87,9 @@
             </header>
 
             <div class="px-6 py-4">
-                {{ $this->addOrUpdateOneRepMaxesAction }}
+                @unless($oneRepMaxes->isEmpty())
+                    {{ $this->addOrUpdateOneRepMaxesAction }}
+                @endunless
             </div>
         </div>
 
@@ -112,25 +114,21 @@
                         <div
                             class="relative flex items-center space-x-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 px-6 py-5 shadow-sm hover:border-gray-400 dark:hover:border-gray-500">
                             <div class="min-w-0 flex-1">
-                                    <span class="absolute inset-0" aria-hidden="true"></span>
-                                    <p class="text-sm font-medium text-gray-900 dark:text-gray-200">{{ $value['training_max'] }}</p>
-                                    <p class="truncate text-sm text-gray-500 dark:text-gray-400">Training Max</p>
+                                <span class="absolute inset-0" aria-hidden="true"></span>
+                                <p class="text-sm font-medium text-gray-900 dark:text-gray-200">{{ $value['training_max'] }}</p>
+                                <p class="truncate text-sm text-gray-500 dark:text-gray-400">Training Max</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         @empty
-            <div class="p-6 text-center">
-                <x-heroicon-s-x-circle class="mx-auto h-12 w-12 text-gray-400"/>
-
-                <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-200">No Rep Maxes added</h3>
-
-                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Get started by adding the rep maxes.</p>
-                <div class="mt-6">
-                    {{ $this->addOneRepMaxesAction }}
-                </div>
-            </div>
+            <x-utilities.empty-state
+                message="No Rep Maxes added"
+                description="Get started by adding the rep maxes."
+            >
+                {{ $this->addOrUpdateOneRepMaxesAction() }}
+            </x-utilities.empty-state>
         @endforelse
     </section>
 
@@ -180,15 +178,10 @@
                 @endforeach
             </div>
         @empty
-            <div class="p-6 text-center">
-                <x-heroicon-s-x-circle class="mx-auto h-12 w-12 text-gray-400"/>
-
-                <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-200">No Program Loaded</h3>
-
-                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                    Please check if the program.yml exists and is being loaded.
-                </p>
-            </div>
+            <x-utilities.empty-state
+                message="No Program Loaded"
+                description="Please check if the program.yml exists and is being loaded."
+            />
         @endforelse
     </section>
 

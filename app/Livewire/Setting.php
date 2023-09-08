@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Livewire;
 
 use App\Enums\MainLiftOptions;
@@ -63,7 +65,7 @@ class Setting extends Component implements HasForms, HasActions
         return Action::make('updateConfigurations')
             ->label('Update Configurations')
             ->icon('heroicon-o-cog')
-            ->action(function (array $data) {
+            ->action(function (array $data): void {
                 $data['training_max_percentage'] = (int) $data['training_max_percentage'];
 
                 $configurationsToBeSaved = Yaml::dump($data);
@@ -100,9 +102,9 @@ class Setting extends Component implements HasForms, HasActions
         return Action::make('addOrUpdateOneRepMaxes')
             ->label('Add/Update One Rep Maxes')
             ->icon('heroicon-o-plus-circle')
-            ->action(function (array $data) {
+            ->action(function (array $data): void {
                 $data = collect($data)
-                    ->map(fn($value) => (float) $value)
+                    ->map(fn ($value) => (float) $value)
                     ->mapWithKeys(function ($value, $key) {
                         $mainLift = str($key)
                             ->replace('_one_rep_max', '')
@@ -145,7 +147,7 @@ class Setting extends Component implements HasForms, HasActions
                         Fieldset::make('Squat')
                             ->columns()
                             ->schema([
-                                TextInput::make(str(MainLiftOptions::Squat->value)->snake()->toString().'_'.'one_rep_max')
+                                TextInput::make(str(MainLiftOptions::Squat->value)->snake()->toString() . '_' . 'one_rep_max')
                                     ->id(MainLiftOptions::Squat->value)
                                     ->numeric()
                                     ->inputMode('decimal')
@@ -153,7 +155,7 @@ class Setting extends Component implements HasForms, HasActions
                         Fieldset::make('Bench Press')
                             ->columns()
                             ->schema([
-                                TextInput::make(str(MainLiftOptions::BenchPress->value)->snake()->toString().'_'.'one_rep_max')
+                                TextInput::make(str(MainLiftOptions::BenchPress->value)->snake()->toString() . '_' . 'one_rep_max')
                                     ->id(MainLiftOptions::BenchPress->value)
                                     ->numeric()
                                     ->inputMode('decimal')
@@ -161,7 +163,7 @@ class Setting extends Component implements HasForms, HasActions
                         Fieldset::make('Deadlift')
                             ->columns()
                             ->schema([
-                                TextInput::make(str(MainLiftOptions::Deadlift->value)->snake()->toString().'_'.'one_rep_max')
+                                TextInput::make(str(MainLiftOptions::Deadlift->value)->snake()->toString() . '_' . 'one_rep_max')
                                     ->id(MainLiftOptions::Deadlift->value)
                                     ->numeric()
                                     ->inputMode('decimal')
@@ -169,7 +171,7 @@ class Setting extends Component implements HasForms, HasActions
                         Fieldset::make('Standing Press')
                             ->columns()
                             ->schema([
-                                TextInput::make(str(MainLiftOptions::StandingPress->value)->snake()->toString().'_'.'one_rep_max')
+                                TextInput::make(str(MainLiftOptions::StandingPress->value)->snake()->toString() . '_' . 'one_rep_max')
                                     ->id(MainLiftOptions::StandingPress->value)
                                     ->numeric()
                                     ->inputMode('decimal')

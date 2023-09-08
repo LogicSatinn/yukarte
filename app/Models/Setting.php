@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
@@ -9,7 +11,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Setting extends Model
 {
-    use SoftDeletes, HasUlids;
+    use HasUlids;
+    use SoftDeletes;
 
     protected $fillable = [
         'one_rep_max',

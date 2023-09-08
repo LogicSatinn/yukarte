@@ -15,7 +15,7 @@
                     <x-nav-link wire:navigate.hover :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('Home') }}
                     </x-nav-link>
-                    <x-nav-link wire:navigate.hover :href="route('workout-routine')" :active="request()->routeIs('workout-routine')">
+                    <x-nav-link wire:navigate.hover :href="route('workout-routine.index')" :active="request()->routeIs('workout-routine.index')">
                         {{ __('Routine') }}
                     </x-nav-link>
                     <x-nav-link wire:navigate.hover :href="route('setting')" :active="request()->routeIs('setting')">
@@ -81,7 +81,7 @@
             <x-responsive-nav-link wire:navigate.hover :href="route('home')" :active="request()->routeIs('home')">
                 {{ __('Home') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link wire:navigate.hover :href="route('workout-routine')" :active="request()->routeIs('workout-routine')">
+            <x-responsive-nav-link wire:navigate.hover :href="route('workout-routine.index')" :active="request()->routeIs('workout-routine.index')">
                 {{ __('Routine') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link wire:navigate.hover :href="route('setting')" :active="request()->routeIs('setting')">

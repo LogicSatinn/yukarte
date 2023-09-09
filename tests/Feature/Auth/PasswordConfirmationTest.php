@@ -1,10 +1,8 @@
 <?php
 
-declare(strict_types=1);
-
 use App\Models\User;
 
-test('confirm password screen can be rendered', function (): void {
+test('confirm password screen can be rendered', function () {
     $user = User::factory()->create();
 
     $response = $this->actingAs($user)->get('/confirm-password');
@@ -12,7 +10,7 @@ test('confirm password screen can be rendered', function (): void {
     $response->assertStatus(200);
 });
 
-test('password can be confirmed', function (): void {
+test('password can be confirmed', function () {
     $user = User::factory()->create();
 
     $response = $this->actingAs($user)->post('/confirm-password', [
@@ -23,7 +21,7 @@ test('password can be confirmed', function (): void {
     $response->assertSessionHasNoErrors();
 });
 
-test('password is not confirmed with invalid password', function (): void {
+test('password is not confirmed with invalid password', function () {
     $user = User::factory()->create();
 
     $response = $this->actingAs($user)->post('/confirm-password', [

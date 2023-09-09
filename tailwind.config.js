@@ -42,6 +42,7 @@ export default {
             },
             transparent: 'transparent',
             current: 'currentColor',
+            white: colors.white,
             slate: colors.slate,
             gray: colors.gray,
             sky: colors.sky,

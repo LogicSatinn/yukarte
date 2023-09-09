@@ -10,8 +10,8 @@ Route::get('test', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+        return Inertia::render('Home');
+    })->name('home');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -23,7 +23,7 @@ const showingNavigationDropdown = ref(false);
                             <div class="shrink-0 flex items-center">
                                 <Link :href="route('home')">
                                     <ApplicationLogo
-                                        class="block h-16 w-auto fill-current text-gray-800 dark:text-gray-200"
+                                        class="block h-16 w-auto fill-current object-cover text-gray-800 dark:text-gray-200"
                                     />
                                 </Link>
                             </div>
@@ -103,7 +103,7 @@ const showingNavigationDropdown = ref(false);
                 >
                     <div class="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink :href="route('home')" :active="route().current('home')">
-                            Dashboard
+                            Home
                         </ResponsiveNavLink>
                     </div>
 

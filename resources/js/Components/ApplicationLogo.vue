@@ -1,3 +1,3 @@
 <template>
-  <img src="../../art/yukarte-logos_transparent.png" alt="Yukarte">
+  <img src="../../art/yukarte-icon.png" alt="Yukarte">
 </template>

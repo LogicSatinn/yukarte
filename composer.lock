@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7d2867f126a0911570d6b35c6090bc31",
+    "content-hash": "f0bd037622253f9f0587edb26006dd08",
     "packages": [
         {
             "name": "blade-ui-kit/blade-heroicons",
@@ -7170,6 +7170,57 @@
                 "source": "https://github.com/tijsverkoyen/CssToInlineStyles/tree/2.2.6"
             },
             "time": "2023-01-03T09:29:04+00:00"
+        },
+        {
+            "name": "tplaner/when",
+            "version": "v3.1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tplaner/When.git",
+                "reference": "8865acc235df8f57c2b229517c57c613b11ce4aa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tplaner/When/zipball/8865acc235df8f57c2b229517c57c613b11ce4aa",
+                "reference": "8865acc235df8f57c2b229517c57c613b11ce4aa",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "When\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tom Planer",
+                    "email": "tplaner@gmail.com"
+                }
+            ],
+            "description": "Date/Calendar recursion library.",
+            "homepage": "https://github.com/tplaner/When",
+            "keywords": [
+                "date",
+                "datetime",
+                "recurrence",
+                "repeat",
+                "time"
+            ],
+            "support": {
+                "issues": "https://github.com/tplaner/When/issues",
+                "source": "https://github.com/tplaner/When/tree/v3.1.5"
+            },
+            "time": "2021-09-24T14:09:59+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

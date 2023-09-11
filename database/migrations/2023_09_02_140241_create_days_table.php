@@ -13,8 +13,8 @@ return new class () extends Migration {
             $table->id();
 
             $table->dateTime('date');
-            $table->json('assistance_work');
-            $table->json('personal_record');
+            $table->json('assistance_work')->nullable();
+            $table->json('personal_record')->nullable();
             $table->mediumText('notes')->nullable();
 
             $table->unsignedBigInteger('week_id');

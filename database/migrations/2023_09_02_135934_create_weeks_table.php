@@ -12,7 +12,7 @@ return new class () extends Migration {
         Schema::create('weeks', function (Blueprint $table): void {
             $table->id();
 
-            $table->string('type');
+            $table->tinyInteger('number');
             $table->date('start');
             $table->date('end');
             $table->mediumText('notes')->nullable();

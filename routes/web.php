@@ -18,4 +18,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('test', function () {
+   return \Carbon\CarbonPeriod::create('now', '2 days', 'Africa/Dar_es_Salaam');
+});
+
 require __DIR__.'/auth.php';

@@ -1,0 +1,43 @@
+Tuesday:
+  main_lifts:
+    - Squat
+    - Bench Press
+  secondary_lifts:
+    Squat:
+      sets: 5
+      reps: 5
+      percentage_based_on_training_max: 65
+
+    Bench Press:
+      sets: 5
+      reps: 5
+      percentage_based_on_training_max: 65
+
+Thursday:
+  main_lifts:
+    - Deadlift
+    - Standing Press
+  secondary_lifts:
+    Deadlift:
+      sets: 5
+      reps: 5
+      percentage_based_on_training_max: 65
+    Standing Press:
+      sets: 5
+      reps: 5
+      percentage_based_on_training_max: 65
+
+Saturday:
+  main_lifts:
+    - Squat
+    - Bench Press
+  secondary_lifts:
+    Squat:
+      sets: 5
+      reps: 5
+      percentage_based_on_training_max: 65
+
+    Bench Press:
+      sets: 5
+      reps: 5
+      percentage_based_on_training_max: 65

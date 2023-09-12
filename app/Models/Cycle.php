@@ -13,7 +13,16 @@ class Cycle extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'training_max',
+        'start',
+        'end',
+        'training_max_volumes',
+        'notes'
+    ];
+
+    protected $casts = [
+        'start' => 'date',
+        'end' => 'date',
+        'training_max_volumes' => 'array',
     ];
 
     public function weeks(): HasMany

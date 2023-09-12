@@ -14,7 +14,7 @@ return new class () extends Migration {
 
             $table->date('start');
             $table->date('end');
-            $table->decimal('training_max');
+            $table->json('training_max_volumes');
             $table->mediumText('notes')->nullable();
 
             $table->softDeletes();

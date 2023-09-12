@@ -13,6 +13,7 @@ class Week extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'number',
         'start',
         'end',
         'cycle_id',

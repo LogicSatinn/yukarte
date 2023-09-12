@@ -19,7 +19,7 @@ class Day extends Model
     ];
 
     protected $casts = [
-        'date' => 'datetime',
+        'date' => 'date',
         'assistance_work' => 'array',
         'personal_record' => 'array',
     ];

@@ -22,7 +22,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('test', function () {
-   return \Carbon\CarbonPeriod::create('now', '2 days', 'Africa/Dar_es_Salaam');
+   app(\App\Actions\GenerateFirstCycle::class)();
+
+   return 'success';
 });
 
 require __DIR__.'/auth.php';

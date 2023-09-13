@@ -3,7 +3,6 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import EmptyState from "@/Components/Utilities/EmptyState.vue";
 import {Head, Link} from "@inertiajs/vue3";
 import {PlusIcon} from "@heroicons/vue/20/solid/index.js";
-import {PaperClipIcon} from "@heroicons/vue/20/solid/index.js";
 import {ChevronRightIcon} from "@heroicons/vue/20/solid/index.js";
 
 defineProps({

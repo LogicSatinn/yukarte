@@ -2,24 +2,23 @@
 
 namespace App\Actions;
 
-use App\Data\ConfigurationData;
-use App\Data\ProgramData;
-use App\Data\SetData;
 use App\Data\TrainingMaxVolumesData;
-use App\Data\WeekData;
 use App\Models\Cycle;
 use App\Models\Week;
 use Brick\Math\BigDecimal;
-use Brick\Math\BigNumber;
 use Carbon\Carbon;
 use Exception;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Yaml\Yaml;
-use When\When;
 
-final class GenerateFirstCycle
+final readonly class GenerateFirstCycle
 {
+    public function __construct(
+        private FormatConfigurationData $formatConfigurationData,
+        private GenerateDaysInACycle $generateDaysInACycle,
+    ) {
+    }
+
     /**
      * @return void
      * @throws Exception
@@ -28,38 +27,7 @@ final class GenerateFirstCycle
     {
         $this->checkIfRequiredFilesExist();
 
-        $configurations = Yaml::parseFile(Storage::disk('settings')->path('configurations.yaml'));
-
-        $configurationData = ConfigurationData::from([
-            'weightUnit' => $configurations['weight_unit'],
-            'trainingMaxPercentage' => BigDecimal::of($configurations['training_max_percentage'])
-                ->dividedBy(
-                    that: 100,
-                    scale: 1,
-                ),
-        ]);
-
-        [$weeks, $sets] = Arr::divide(Yaml::parseFile(Storage::disk('settings')->path('program.yaml')));
-
-        $program = collect($weeks)
-            ->mapWithKeys(fn($week, $index) => [
-                $week => WeekData::from(
-                    collect($sets[$index])
-                        ->mapWithKeys(
-                            fn($setValue, $setName) => [
-                                $setName => SetData::from([
-                                    'percentage_based_on_training_max' => BigDecimal::of($setValue['percentage_based_on_training_max']),
-                                    'reps' => str($setValue['reps'])->contains('+') ? $setValue['reps'] : BigNumber::of($setValue['reps']),
-                                ]),
-                            ]
-                        )
-                        ->toArray()
-                ),
-            ]
-            )
-            ->toArray();
-
-        $programData = ProgramData::from($program);
+        $configurationData = ($this->formatConfigurationData)();
 
         $trainingMaxVolumes = collect(Yaml::parseFile(Storage::disk('settings')->path('one-rep-maxes.yaml')))
             ->mapWithKeys(fn(
@@ -74,22 +42,9 @@ final class GenerateFirstCycle
             'training_max_volumes' => TrainingMaxVolumesData::from($trainingMaxVolumes)->toArray(),
         ]);
 
-        $days = collect(Yaml::parseFile(Storage::disk('settings')->path('routine.yaml')))
-            ->keys();
+        $daysInAMonth = ($this->generateDaysInACycle)(startDate: $cycle->start);
 
-        $workoutDaysInAMonthCount = $days->count() * 4;
-
-        $dayNameShortened = $days
-            ->map(fn($day) => str($day)->substr(0, 2)->upper()->toString())
-            ->implode(',');
-
-        $when = app(When::class);
-
-        $when->startDate(now()->toDate())
-            ->rrule("FREQ=DAILY;BYDAY={$dayNameShortened};COUNT={$workoutDaysInAMonthCount}")
-            ->generateOccurrences();
-
-        collect($when->occurrences)
+        $daysInAMonth
             ->chunk(3)
             ->map(function ($chunk, $index) use ($cycle) {
                 $week = Week::create([

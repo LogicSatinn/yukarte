@@ -16,9 +16,9 @@ class RoutineController extends Controller
     public function index(): Response
     {
         return Inertia::render(
-            'Routine/Index',
-            [
-                'routine' => Storage::disk('settings')->exists('routine.yml')
+            component: 'Routine/Index',
+            props: [
+                'routine' => Storage::disk('settings')->exists('routine.yaml')
                     ? Yaml::parseFile(Storage::disk('settings')->path('routine.yaml'))
                     : [],
             ]
@@ -28,7 +28,7 @@ class RoutineController extends Controller
     public function create(): Response
     {
         return Inertia::render(
-            'Routine/Create',
+            component: 'Routine/Create',
         );
     }
 
@@ -37,9 +37,9 @@ class RoutineController extends Controller
         $request
             ->file('routine')
             ->storeAs(
-                '',
-                'routine.yaml',
-                'settings'
+                path: '',
+                name: 'routine.yaml',
+                options: 'settings'
             );
 
         return to_route('routine.index');

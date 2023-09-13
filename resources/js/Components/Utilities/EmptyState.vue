@@ -22,7 +22,7 @@ defineProps({
         <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-200">{{ message }}</h3>
 
         <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ description }}</p>
-        <div class="mt-6">
+        <div class="mt-6 mx-auto w-44">
             <slot></slot>
         </div>
     </div>

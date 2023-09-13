@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Actions;
 
 use Carbon\Carbon;
@@ -28,7 +30,7 @@ final class GenerateDaysInACycle
         $workoutDaysInAMonthCount = $days->count() * 4; // 4 weeks in a month
 
         $dayNameShortened = $days
-            ->map(fn($day) => str($day)->substr(0, 2)->upper()->toString())
+            ->map(fn ($day) => str($day)->substr(0, 2)->upper()->toString())
             ->implode(',');
 
         $when = app(When::class);
@@ -46,7 +48,7 @@ final class GenerateDaysInACycle
      */
     private function checkIfFileExists(): void
     {
-        if (!Storage::disk('settings')->exists('routine.yaml')) {
+        if ( ! Storage::disk('settings')->exists('routine.yaml')) {
             throw new Exception('Routine file does not exist.');
         }
     }

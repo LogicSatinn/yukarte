@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Actions;
 
 use App\Data\ConfigurationData;
@@ -38,7 +40,7 @@ final class FormatConfigurationData
      */
     private function checkIfFileExists(): void
     {
-        if (!Storage::disk('settings')->exists('configurations.yaml')) {
+        if ( ! Storage::disk('settings')->exists('configurations.yaml')) {
             throw new Exception('Configurations file does not exist.');
         }
     }

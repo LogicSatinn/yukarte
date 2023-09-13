@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Rules;
 
 use Closure;
@@ -9,7 +11,7 @@ class FileIsYamlRule implements ValidationRule
 {
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if ($value->getClientOriginalExtension() !== 'yaml') {
+        if ('yaml' !== $value->getClientOriginalExtension()) {
             $fail('The :attribute must be a YAML file.');
         }
     }

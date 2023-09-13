@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRoutineRequest;
@@ -35,10 +37,10 @@ class RoutineController extends Controller
         $request
             ->file('routine')
             ->storeAs(
-            '',
-            'routine.yaml',
-            'settings'
-        );
+                '',
+                'routine.yaml',
+                'settings'
+            );
 
         return to_route('routine.index');
     }

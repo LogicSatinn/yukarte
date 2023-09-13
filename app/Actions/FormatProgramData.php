@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Actions;
 
 use App\Data\ProgramData;
@@ -26,20 +28,20 @@ final class FormatProgramData
 
         $program = collect($weeks)
             ->mapWithKeys(
-                fn($week, $index) => [
-                $week => WeekData::from(
-                    collect($sets[$index])
-                        ->mapWithKeys(
-                            fn($setValue, $setName) => [
-                                $setName => SetData::from([
-                                    'percentage_based_on_training_max' => BigDecimal::of($setValue['percentage_based_on_training_max']),
-                                    'reps' => str($setValue['reps'])->contains('+') ? $setValue['reps'] : BigNumber::of($setValue['reps']),
-                                ]),
-                            ]
-                        )
-                        ->toArray()
-                ),
-            ]
+                fn ($week, $index) => [
+                    $week => WeekData::from(
+                        collect($sets[$index])
+                            ->mapWithKeys(
+                                fn ($setValue, $setName) => [
+                                    $setName => SetData::from([
+                                        'percentage_based_on_training_max' => BigDecimal::of($setValue['percentage_based_on_training_max']),
+                                        'reps' => str($setValue['reps'])->contains('+') ? $setValue['reps'] : BigNumber::of($setValue['reps']),
+                                    ]),
+                                ]
+                            )
+                            ->toArray()
+                    ),
+                ]
             )
             ->toArray();
 
@@ -52,7 +54,7 @@ final class FormatProgramData
      */
     private function checkIfFileExists(): void
     {
-        if (!Storage::disk('settings')->exists('program.yaml')) {
+        if ( ! Storage::disk('settings')->exists('program.yaml')) {
             throw new Exception('Program file does not exist.');
         }
     }

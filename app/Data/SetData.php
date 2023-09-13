@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Data;
 
 use Brick\Math\BigDecimal;
@@ -8,10 +10,9 @@ use Spatie\LaravelData\Data;
 
 class SetData extends Data
 {
-public function __construct(
-    public BigDecimal $percentage_based_on_training_max,
-    public BigNumber|string $reps,
-)
-{
-}
+    public function __construct(
+        public BigDecimal $percentage_based_on_training_max,
+        public BigNumber|string $reps,
+    ) {
+    }
 }

@@ -1,16 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoutineController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('test', function () {
-    return Inertia::render('Test');
-})->name('test');
+Route::get('test', fn () => Inertia::render('Test'))->name('test');
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function (): void {
     Route::get('/', HomeController::class)->name('home');
     Route::get('/routine', [RoutineController::class, 'index'])->name('routine.index');
     Route::get('/routine/create', [RoutineController::class, 'create'])->name('routine.create');
@@ -22,9 +22,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('test', function () {
-   app(\App\Actions\GenerateFirstCycle::class)();
+    app(\App\Actions\GenerateFirstCycle::class)();
 
-   return 'success';
+    return 'success';
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Actions;
 
 use App\Data\TrainingMaxVolumesData;
@@ -30,10 +32,9 @@ final readonly class GenerateFirstCycle
         $configurationData = ($this->formatConfigurationData)();
 
         $trainingMaxVolumes = collect(Yaml::parseFile(Storage::disk('settings')->path('one-rep-maxes.yaml')))
-            ->mapWithKeys(fn(
-                $value,
-                $key
-            ) => [str($key)->camel()->toString() => BigDecimal::of($value)->multipliedBy($configurationData->trainingMaxPercentage)])
+            ->mapWithKeys(
+                fn ($value, $key) => [str($key)->camel()->toString() => BigDecimal::of($value)->multipliedBy($configurationData->trainingMaxPercentage)]
+            )
             ->toArray();
 
         $cycle = Cycle::create([
@@ -46,7 +47,7 @@ final readonly class GenerateFirstCycle
 
         $daysInAMonth
             ->chunk(3)
-            ->map(function ($chunk, $index) use ($cycle) {
+            ->map(function ($chunk, $index) use ($cycle): void {
                 $week = Week::create([
                     'number' => $index + 1,
                     'start' => Carbon::parse($chunk->first())->toDate(),
@@ -55,7 +56,7 @@ final readonly class GenerateFirstCycle
                 ]);
 
                 $week->days()->createMany(
-                    $chunk->map(fn($day) => ['date' => Carbon::parse($day)->toDate()])->toArray()
+                    $chunk->map(fn ($day) => ['date' => Carbon::parse($day)->toDate()])->toArray()
                 );
             });
     }
@@ -66,19 +67,19 @@ final readonly class GenerateFirstCycle
      */
     private function checkIfRequiredFilesExist(): void
     {
-        if (!Storage::disk('settings')->exists('configurations.yaml')) {
+        if ( ! Storage::disk('settings')->exists('configurations.yaml')) {
             throw new Exception('Configurations file is not found.');
         }
 
-        if (!Storage::disk('settings')->exists('program.yaml')) {
+        if ( ! Storage::disk('settings')->exists('program.yaml')) {
             throw new Exception('Program file is not found.');
         }
 
-        if (!Storage::disk('settings')->exists('routine.yaml')) {
+        if ( ! Storage::disk('settings')->exists('routine.yaml')) {
             throw new Exception('Routine file is not found.');
         }
 
-        if (!Storage::disk('settings')->exists('one-rep-maxes.yaml')) {
+        if ( ! Storage::disk('settings')->exists('one-rep-maxes.yaml')) {
             throw new Exception('One rep maxes file is not found.');
         }
     }

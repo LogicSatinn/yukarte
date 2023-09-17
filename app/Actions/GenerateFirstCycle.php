@@ -8,10 +8,12 @@ use App\Data\TrainingMaxVolumesData;
 use App\Models\Cycle;
 use App\Models\Week;
 use Brick\Math\BigDecimal;
+use Brick\Math\Exception\MathException;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Yaml\Yaml;
+use When\InvalidStartDate;
 
 final readonly class GenerateFirstCycle
 {
@@ -22,10 +24,13 @@ final readonly class GenerateFirstCycle
     }
 
     /**
+     * @param  Carbon  $startingDate
      * @return void
+     * @throws MathException
+     * @throws InvalidStartDate
      * @throws Exception
      */
-    public function __invoke(): void
+    public function __invoke(Carbon $startingDate): void
     {
         $this->checkIfRequiredFilesExist();
 
@@ -38,8 +43,8 @@ final readonly class GenerateFirstCycle
             ->toArray();
 
         $cycle = Cycle::create([
-            'start' => now()->toDate(),
-            'end' => now()->addDays(30)->toDate(),
+            'start' => $startingDate->toDate(),
+            'end' => $startingDate->addDays(30)->toDate(),
             'training_max_volumes' => TrainingMaxVolumesData::from($trainingMaxVolumes)->toArray(),
         ]);
 

@@ -4,6 +4,10 @@ import {Head, useForm} from '@inertiajs/vue3';
 import {ref} from 'vue'
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot} from '@headlessui/vue'
 
+defineProps({
+    shouldCreateFirstCycle: Boolean,
+})
+
 const openModal = ref(false)
 
 const form = useForm({
@@ -35,7 +39,9 @@ function handleSubmission (event) {
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="relative p-6 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div
-                        class="absolute top-0 left-0 w-full h-auto py-2 duration-300 ease-out bg-fuchsia-100 shadow-sm sm:p-6 sm:h-10">
+                        v-if="shouldCreateFirstCycle"
+                        class="absolute top-0 left-0 w-full h-auto py-2 duration-300 ease-out bg-fuchsia-100 shadow-sm sm:p-6 sm:h-10"
+                    >
                         <div class="flex items-center justify-center w-full h-full px-3 mx-auto max-w-7xl">
                             <button
                                 type="button"
@@ -50,6 +56,8 @@ function handleSubmission (event) {
                             </button>
                         </div>
                     </div>
+
+
                 </div>
             </div>
         </div>

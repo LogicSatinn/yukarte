@@ -11,6 +11,7 @@
         "php": "^8.2",
         "brick/math": "^0.11.0",
         "cerbero/enum": "^1.0",
+        "defstudio/telegraph": "^1.38",
         "filament/actions": "^3.0-stable",
         "filament/forms": "^3.0-stable",
         "filament/infolists": "^3.0-stable",

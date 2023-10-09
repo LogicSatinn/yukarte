@@ -12,7 +12,7 @@ return new class () extends Migration {
         Schema::create('days', function (Blueprint $table): void {
             $table->id();
 
-            $table->dateTime('date');
+            $table->date('date');
             $table->json('assistance_work')->nullable();
             $table->json('personal_record')->nullable();
             $table->mediumText('notes')->nullable();
@@ -21,7 +21,6 @@ return new class () extends Migration {
             $table->index('week_id');
 
             $table->softDeletes();
-            $table->timestamps();
         });
     }
 

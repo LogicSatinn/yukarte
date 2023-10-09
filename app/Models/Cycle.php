@@ -12,6 +12,8 @@ class Cycle extends Model
 {
     use SoftDeletes;
 
+    public $timestamps = false;
+
     protected $fillable = [
         'start',
         'end',

@@ -18,7 +18,6 @@ return new class () extends Migration {
             $table->mediumText('notes')->nullable();
 
             $table->softDeletes();
-            $table->timestamps();
         });
     }
 

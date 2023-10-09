@@ -21,7 +21,6 @@ return new class () extends Migration {
             $table->index('cycle_id');
 
             $table->softDeletes();
-            $table->timestamps();
         });
     }
 

@@ -11,6 +11,8 @@ class Day extends Model
 {
     use SoftDeletes;
 
+    public $timestamps = false;
+
     protected $fillable = [
         'date',
         'assistance_work',

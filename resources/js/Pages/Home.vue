@@ -2,7 +2,8 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import {Head, useForm} from '@inertiajs/vue3';
 import {ref} from 'vue'
-import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot} from '@headlessui/vue'
+import {Dialog, TransitionChild, TransitionRoot} from '@headlessui/vue'
+import {XMarkIcon} from "@heroicons/vue/20/solid/index.js";
 
 defineProps({
     shouldCreateFirstCycle: Boolean,
@@ -64,72 +65,49 @@ function handleSubmission (event) {
     </AuthenticatedLayout>
 
     <TransitionRoot as="template" :show="openModal">
-        <Dialog as="div" class="relative z-10" @close="openModal = false">
-            <TransitionChild
-                as="template"
-                enter="ease-out duration-300"
-                enter-from="opacity-0"
-                enter-to="opacity-100"
-                leave="ease-in duration-200"
-                leave-from="opacity-100"
-                leave-to="opacity-0"
-            >
-                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"/>
-            </TransitionChild>
-
-            <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
-                <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                    <TransitionChild
-                        as="template"
-                        enter="ease-out duration-300"
-                        enter-from="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                        enter-to="opacity-100 translate-y-0 sm:scale-100"
-                        leave="ease-in duration-200"
-                        leave-from="opacity-100 translate-y-0 sm:scale-100"
-                        leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+        <Dialog as="div" class="relative w-auto h-auto z-40">
+            <div v-show="openModal" class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen" x-cloak>
+                <TransitionChild
+                    as="template"
+                    enter="ease-out duration-300"
+                    enter-from="opacity-0"
+                    enter-to="opacity-100"
+                    leave="ease-in duration-300"
+                    leave-from="opacity-100"
+                    leave-to="opacity-0"
                     >
-                        <DialogPanel
-                            class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-                            <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-                                <div class="sm:flex sm:items-start">
-                                    <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                                        <DialogTitle as="h3" class="text-sm font-semibold text-gray-900">
-                                            When will this cycle start?
-                                        </DialogTitle>
-                                        <div class="mt-2">
-                                            <form >
-                                                <label for="starting_date" class="sr-only">Starting Date</label>
-                                                <input
-                                                    type="date"
-                                                    v-model="form.starting_date"
-                                                    id="starting_date"
-                                                    class="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-yukarte-500 focus:ring-yukarte-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-                                                />
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                                <button
-                                    type="button"
-                                    class="inline-flex w-full justify-center rounded-md bg-yukarte-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-yukarte-500 sm:ml-3 sm:w-auto"
-                                    @click="handleSubmission"
-                                >
-                                    Proceed
-                                </button>
-                                <button
-                                    type="button"
-                                    class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                                    @click="openModal = false"
-                                    ref="cancelButtonRef"
-                                >
-                                    Cancel
-                                </button>
-                            </div>
-                        </DialogPanel>
-                    </TransitionChild>
-                </div>
+                    <div class="absolute inset-0 w-full h-full bg-white backdrop-blur-sm bg-opacity-70"></div>
+                </TransitionChild>
+
+                <TransitionChild
+                    as="div"
+                    enter="ease-out duration-300"
+                    enter-start="opacity-0 -translate-y-2 sm:scale-95"
+                    enter-end="opacity-100 translate-y-0 sm:scale-100"
+                    leave="ease-in duration-200"
+                    leave-start="opacity-100 translate-y-0 sm:scale-100"
+                    leave-end="opacity-0 -translate-y-2 sm:scale-95"
+                    class="relative w-full py-6 bg-white border shadow-lg px-7 border-neutral-200 sm:max-w-lg sm:rounded-lg">
+                    <div class="flex items-center justify-between pb-3">
+                        <h3 class="text-base font-semibold capitalize tracking-wide">Cycle's starting date</h3>
+                        <button @click="openModal=false" class="absolute top-0 right-0 flex items-center justify-center w-8 h-8 mt-5 mr-5 text-gray-600 rounded-full hover:text-gray-800 hover:bg-gray-50">
+                            <XMarkIcon class="w-5 h-5" />
+                        </button>
+                    </div>
+                    <div class="relative w-auto pb-4">
+                        <label for="starting_date" class="sr-only">Starting Date</label>
+                        <input
+                            type="date"
+                            v-model="form.starting_date"
+                            id="starting_date"
+                            class="block w-full border-gray-200 rounded-md text-sm focus:border-yukarte-500 focus:ring-yukarte-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+                        />
+                    </div>
+                    <div class="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2">
+                        <button @click="openModal=false" type="button" class="inline-flex items-center justify-center h-10 px-4 py-2 text-sm font-medium transition-colors border rounded-md focus:outline-none focus:ring-2 focus:ring-yukarte-100 focus:ring-offset-2">Cancel</button>
+                        <button @click="handleSubmission" type="button" class="inline-flex items-center justify-center h-10 px-4 py-2 text-sm font-medium text-white transition-colors border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-yukarte-900 focus:ring-offset-2 bg-yukarte-950 hover:bg-yukarte-900">Continue</button>
+                    </div>
+                </TransitionChild>
             </div>
         </Dialog>
     </TransitionRoot>

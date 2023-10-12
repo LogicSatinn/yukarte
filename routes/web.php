@@ -6,10 +6,11 @@ use App\Http\Controllers\CreateFirstCycleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoutineController;
+use App\Http\Controllers\WorkoutSpecificsController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('test', fn () => Inertia::render('Test'))->name('test');
+Route::get('test', fn() => Inertia::render('Test'))->name('test');
 
 Route::middleware('auth')->group(function (): void {
     Route::get('/', HomeController::class)->name('home');
@@ -24,4 +25,6 @@ Route::middleware('auth')->group(function (): void {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__ . '/auth.php';
+Route::get('workout-specifics/{day}', WorkoutSpecificsController::class)->name('workout-specifics');
+
+require __DIR__.'/auth.php';

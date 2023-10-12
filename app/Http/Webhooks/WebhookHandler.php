@@ -12,16 +12,10 @@ use Illuminate\Support\Stringable;
 
 class WebhookHandler extends BaseWebhookHandler
 {
-    public function pr()
+    public function start(): void
     {
-        Telegraph::message('PR')
-            ->replyKeyboard(
-                ReplyKeyboard::make()->buttons([
-                    ReplyButton::make('foo')->requestPoll(),
-                    ReplyButton::make('bar')->requestQuiz(),
-                    ReplyButton::make('baz')->webApp('https://webapp.dev'),
-                ])
-            )
-        ->send();
+        $this->chat
+            ->markdown("No backing down now, MF. *Let's get to work.*")
+            ->send();
     }
 }

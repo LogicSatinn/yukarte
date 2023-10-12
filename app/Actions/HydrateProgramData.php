@@ -14,7 +14,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Yaml\Yaml;
 
-final class FormatProgramData
+final class HydrateProgramData
 {
     /**
      * @return ProgramData

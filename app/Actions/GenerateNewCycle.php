@@ -18,7 +18,7 @@ use When\InvalidStartDate;
 final readonly class GenerateNewCycle
 {
     public function __construct(
-        private FormatConfigurationData $formatConfigurationData,
+        private HydrateConfigurationData $hydrateConfigurationData,
         private GenerateDaysInACycle $generateDaysInACycle,
     ) {
     }
@@ -33,7 +33,7 @@ final readonly class GenerateNewCycle
     {
         $this->checkIfRequiredFilesExist();
 
-        $configurationData = ($this->formatConfigurationData)();
+        $configurationData = ($this->hydrateConfigurationData)();
 
         $trainingMaxVolumes = collect(Yaml::parseFile(Storage::disk('settings')->path('one-rep-maxes.yaml')))
             ->mapWithKeys(

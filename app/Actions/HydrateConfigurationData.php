@@ -11,7 +11,7 @@ use Exception;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Yaml\Yaml;
 
-final class FormatConfigurationData
+final class HydrateConfigurationData
 {
     /**
      * @return ConfigurationData
